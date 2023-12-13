@@ -11,6 +11,17 @@ lazy_static = "1.4.0"
 blake3 = { version = "1.5", features=["pure"] }
 rand = "0.8.5"
 
+[features]
+# Compile with --no-default-features for wasm target
+default = ["fast_build"]
+fast_build = ["bevy/dynamic_linking"]
+
+
+# To reduce code size for wasm build
+[profile.release]
+lto = true
+opt-level = 's'
+
 # Enable a small amount of optimization in debug mode
 [profile.dev]
 opt-level = 1
